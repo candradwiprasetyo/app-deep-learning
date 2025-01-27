@@ -4,6 +4,7 @@ import { useState } from "react";
 import * as pdfjsLib from "pdfjs-dist/webpack";
 import SideNavbar from "@/components/SideNavbar";
 import Navbar from "@/components/Navbar";
+import { TextItemType } from "@/types";
 import {
   ContentType,
   HandleInputChangeType,
@@ -110,8 +111,11 @@ export default function CreateDocument() {
       for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);
         const text = await page.getTextContent();
-        text.items.forEach((item: any) => {
-          textContent += item.str + " ";
+
+        text.items.forEach((item) => {
+          if ((item as TextItemType).str) {
+            textContent += (item as TextItemType).str + " ";
+          }
         });
       }
 

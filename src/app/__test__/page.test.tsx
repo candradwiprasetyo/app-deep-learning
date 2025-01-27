@@ -2,20 +2,35 @@ import { render, screen } from "@testing-library/react";
 import Homepage from "@/app/page";
 import { jest } from "@jest/globals";
 
-jest.mock("@/components/SideNavbar", () => () => (
-  <div data-testid="side-navbar">SideNavbar</div>
-));
-jest.mock("@/components/Documents", () => () => (
-  <div data-testid="documents">Documents</div>
-));
-jest.mock("@/components/Navbar", () => {
-  return jest.fn(({ title }: { title: string }) => (
-    <div data-testid="navbar">{title}</div>
-  ));
+jest.mock("@/components/SideNavbar", () => {
+  const MockedSideNavbar = () => (
+    <div data-testid="side-navbar">SideNavbar</div>
+  );
+  MockedSideNavbar.displayName = "SideNavbar";
+  return MockedSideNavbar;
 });
-jest.mock("@/components/CreateReport", () => () => (
-  <div data-testid="create-report">CreateReport</div>
-));
+
+jest.mock("@/components/Documents", () => {
+  const MockedDocuments = () => <div data-testid="documents">Documents</div>;
+  MockedDocuments.displayName = "Documents";
+  return MockedDocuments;
+});
+
+jest.mock("@/components/Navbar", () => {
+  const MockedNavbar = ({ title }: { title: string }) => (
+    <div data-testid="navbar">{title}</div>
+  );
+  MockedNavbar.displayName = "Navbar";
+  return jest.fn(MockedNavbar);
+});
+
+jest.mock("@/components/CreateReport", () => {
+  const MockedCreateReport = () => (
+    <div data-testid="create-report">CreateReport</div>
+  );
+  MockedCreateReport.displayName = "CreateReport";
+  return MockedCreateReport;
+});
 
 describe("CreateDocument", () => {
   it("renders all child components correctly", () => {

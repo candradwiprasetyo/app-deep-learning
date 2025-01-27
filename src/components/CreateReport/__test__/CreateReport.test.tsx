@@ -4,17 +4,42 @@ import "@testing-library/jest-dom";
 import mockRouter from "next-router-mock";
 import { jest } from "@jest/globals";
 
-jest.mock("next/image", () => ({ src, alt }: { src: string; alt: string }) => (
-  <img src={src} alt={alt} />
-));
+jest.mock("next/image", () => {
+  return function MockedImage({
+    src,
+    alt,
+    width,
+    height,
+  }: {
+    src: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  }) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={alt || "mocked image"}
+        width={width}
+        height={height}
+      />
+    );
+  };
+});
 jest.mock("next/link", () => {
-  return ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <a href={href}>{children}</a>
-  );
+  const MockedLink = ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>;
+  MockedLink.displayName = "Link";
+  return MockedLink;
 });
 
-// Mock next/router
-jest.mock("next/router", () => require("next-router-mock"));
+jest.mock("next/router", () => mockRouter);
 
 describe("CreateReport Component", () => {
   beforeEach(() => {
@@ -40,5 +65,6 @@ describe("CreateReport Component", () => {
   it("renders the button with correct value", () => {
     render(<CreateReport />);
     const button = screen.getByText("Create Report Doc");
+    expect(button).toBeInTheDocument();
   });
 });

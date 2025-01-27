@@ -8,7 +8,7 @@ const config: Config.InitialOptions = {
     "^.+\\.(ts|tsx)$": ["ts-jest", { tsconfig: "tsconfig.json" }],
   },
   moduleNameMapper: {
-    "\\.(css|scss)$": "identity-obj-proxy", // Mock CSS imports
+    "\\.(css|scss)$": "identity-obj-proxy",
     "^next/image$": "<rootDir>/__mocks__/next/image.js",
     "^next/link$": "<rootDir>/__mocks__/next/link.js",
     "^@/(.*)$": "<rootDir>/src/$1",

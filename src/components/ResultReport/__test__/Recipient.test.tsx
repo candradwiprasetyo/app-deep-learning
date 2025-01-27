@@ -4,6 +4,7 @@ import Recipient from "../Recipient";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: ({ alt, src }: { alt: string; src: string }) => (
+    /* eslint-disable @next/next/no-img-element */
     <img alt={alt} src={src} />
   ),
 }));

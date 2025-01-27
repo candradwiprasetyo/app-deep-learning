@@ -18,7 +18,7 @@ export type ContentType = {
   file: File | null;
   pdfText: string;
   fileValidation?: boolean;
-  [key: string]: any;
+  [key: string]: string | number | boolean | File | null | undefined;
 }[];
 
 export type HandleInputChangeType = (
@@ -32,6 +32,10 @@ export type ChatType = {
   type: "sender" | "recipient";
   message: string;
 };
+
+export interface TextItemType {
+  str: string;
+}
 
 export type HandleSubmitType = (e: React.FormEvent<HTMLFormElement>) => void;
 

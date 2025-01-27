@@ -7,11 +7,20 @@ jest.mock("next/link", () => ({
   default: ({ children }: { children: React.ReactNode }) => children,
 }));
 
+/* eslint-disable @next/next/no-img-element */
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: ({ alt, src, width, height }: any) => (
-    <img alt={alt} src={src} width={width} height={height} />
-  ),
+  default: ({
+    alt,
+    src,
+    width,
+    height,
+  }: {
+    alt: string;
+    src: string;
+    width?: number | string;
+    height?: number | string;
+  }) => <img alt={alt} src={src} width={width} height={height} />,
 }));
 
 describe("Navbar", () => {

@@ -4,29 +4,34 @@ import { documents } from "@/data/documents";
 import "@testing-library/jest-dom";
 import { jest } from "@jest/globals";
 
-jest.mock(
-  "next/image",
-  () =>
-    ({
-      src,
-      alt,
-      width,
-      height,
-    }: {
-      src: string;
-      alt: string;
-      width: number;
-      height: number;
-    }) =>
-      <img src={src} alt={alt} width={width} height={height} />
-);
+jest.mock("next/image", () => {
+  /* eslint-disable @next/next/no-img-element */
+  const MockedImage = ({
+    src,
+    alt,
+    width,
+    height,
+  }: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  }) => <img src={src} alt={alt} width={width} height={height} />;
+  MockedImage.displayName = "Image";
+  return MockedImage;
+});
 
-jest.mock(
-  "next/link",
-  () =>
-    ({ href, children }: { href: string; children: React.ReactNode }) =>
-      <a href={href}>{children}</a>
-);
+jest.mock("next/link", () => {
+  const MockedLink = ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>;
+  MockedLink.displayName = "Link";
+  return MockedLink;
+});
 
 describe("Documents Component", () => {
   it("renders the Documents component correctly", () => {
