@@ -24,7 +24,7 @@ Make sure you have the following installed on your local machine:
 Clone this repository to your local machine:
 
 ````bash
-git clone https://github.com/your-username/app-deep-learning.git
+git clone https://github.com/candradwiprasetyo/app-deep-learning.git
 cd app-deep-learning
 
 ## Getting Started
