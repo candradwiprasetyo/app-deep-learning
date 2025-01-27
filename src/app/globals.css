@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f5f6fa;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Inter, sans-serif;
+  color: #353535;
+}
+
+.bg-secondary {
+  background-color: #f5f6fa;
+}
+
+.bg-tertiary {
+  background-color: #fafafa;
+}
+
+.text-primary {
+  color: #353535;
+}
+
+.text-tertiary {
+  color: #a2a4ac;
+}
+
+.bg-button {
+  background-color: #2e2b26;
+}
+
+.bg-icon-secondary {
+  background-color: #acafbe;
+}
+
+.button-shadow {
+  box-shadow: 0px 1px 3px 0px rgba(18, 18, 18, 0.1);
+  box-shadow: 0px 0px 0px 1px rgba(18, 18, 18, 0.07);
+  box-shadow: 0px 1px 1px 0px rgba(18, 18, 18, 0.1);
+}
